@@ -60,7 +60,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
 	}
 	return true;
 };
-//var_dump($GLOBALS['IP']);var_dump(__DIR__);var_dump(substr( __DIR__, strlen( $GLOBALS['IP'] ) ));var_dump('/../..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/js/tests/ValueParsers');exit;
+
 /**
  * Hook to add QUnit test cases.
  * @see https://www.mediawiki.org/wiki/Manual:Hooks/ResourceLoaderTestModules
