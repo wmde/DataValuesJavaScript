@@ -132,9 +132,11 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 	\ResourceLoader &$resourceLoader
 ) {
 	// @codeCoverageIgnoreStart
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+
 	$moduleTemplate = array(
-		'localBasePath' => __DIR__ . '/js/tests/ValueFormatters',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/js/tests/ValueFormatters',
+		'localBasePath' => __DIR__ . '/test',
+		'remoteExtPath' => $resourceExtPathParts[1] . '/tests',
 	);
 
 	$testModules['qunit']['ext.valueFormatters.tests'] = $moduleTemplate + array(
