@@ -18,7 +18,7 @@ return call_user_func( function() {
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/resources',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/resources',
+		'remoteExtPath' => $remoteExtPathParts[1] . '/resources',
 	);
 
 	$mwVvResources = array(
