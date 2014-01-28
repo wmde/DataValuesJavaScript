@@ -51,11 +51,14 @@ $GLOBALS['wgValueParsers'] = array();
 $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModules, \ResourceLoader &$resourceLoader ) {
 	// Register DataValue QUnit tests. Take the predefined test definitions and make them
 	// suitable for registration with MediaWiki's resource loader.
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+
 	$ownModules = include( __DIR__ . '/DataValues.tests.qunit.php' );
 	$ownModulesTemplate = array(
 		'localBasePath' => __DIR__,
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ),
+		'remoteExtPath' => $remoteExtPathParts[1],
 	);
+
 	foreach( $ownModules as $ownModuleName => $ownModule ) {
 		$testModules['qunit'][ $ownModuleName ] = $ownModule + $ownModulesTemplate;
 	}
@@ -73,9 +76,11 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModu
  */
 $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function ( array &$testModules, \ResourceLoader &$resourceLoader ) {
 	// @codeCoverageIgnoreStart
+	$remoteExtPathParts = explode( DIRECTORY_SEPARATOR . 'extensions' . DIRECTORY_SEPARATOR , __DIR__, 2 );
+
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/js/tests/ValueParsers',
-		'remoteExtPath' => '..' . substr( __DIR__, strlen( $GLOBALS['IP'] ) ) . '/js/tests/ValueParsers',
+		'remoteExtPath' => $remoteExtPathParts[1] . '/js/tests/ValueParsers',
 	);
 
 	$testModules['qunit']['ext.valueParsers.tests'] = $moduleTemplate + array(
@@ -136,7 +141,7 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 
 	$moduleTemplate = array(
 		'localBasePath' => __DIR__ . '/test',
-		'remoteExtPath' => $resourceExtPathParts[1] . '/tests',
+		'remoteExtPath' => $remoteExtPathParts[1] . '/tests',
 	);
 
 	$testModules['qunit']['ext.valueFormatters.tests'] = $moduleTemplate + array(
