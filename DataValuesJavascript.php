@@ -7,7 +7,7 @@ if ( defined( 'DATA_VALUES_JAVASCRIPT_VERSION' ) ) {
 	return 1;
 }
 
-define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.5.1' );
+define( 'DATA_VALUES_JAVASCRIPT_VERSION', '0.5.2-alpha' );
 
 // Include the composer autoloader if it is present.
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -62,7 +62,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'jquery',
 				'jquery.qunit',
 				'util.inherit',
 				'valueFormatters',
@@ -75,7 +74,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'jquery',
 				'jquery.qunit',
 				'util.inherit',
 				'valueParsers',

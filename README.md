@@ -15,6 +15,10 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.5.2 (dev)
+
+* Remove ResourceLoader dependencies on jquery and mediawiki (bug 69468)
+
 ### 0.5.1 (2014-06-04)
 
 #### Bugfixes
