@@ -62,7 +62,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'jquery',
 				'jquery.qunit',
 				'util.inherit',
 				'valueFormatters',
@@ -75,7 +74,6 @@ $GLOBALS['wgHooks']['ResourceLoaderTestModules'][] = function(
 			),
 			'dependencies' => array(
 				'dataValues.DataValue',
-				'jquery',
 				'jquery.qunit',
 				'util.inherit',
 				'valueParsers',
