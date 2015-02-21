@@ -106,6 +106,31 @@ define( [
 		);
 	}
 
+	QUnit.test( 'time.Time.iso8601()', function( assert ) {
+		var definitions = {
+			'+1-00-00T00:00:00Z': {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: 1,
+				precision: Time.PRECISION.YEAR
+			},
+			'+123456789012-00-00T00:00:00Z': {
+				calendarname: Time.CALENDAR.GREGORIAN,
+				year: 123456789012,
+				precision: Time.PRECISION.YEAR
+			}
+		};
+
+		$.each( definitions, function( expected, definition ) {
+			var actual = new Time( definition ).iso8601();
+
+			assert.ok(
+				expected === actual,
+				'Expected iso8601() to return "' + expected + '", got "' + actual + '"'
+			);
+
+		} );
+	} );
+
 	QUnit.test( 'time.Time.equals()', function( assert ) {
 		$.each( validTimeDefinitions, function( name, definition ) {
 			var time1 = new Time( definition ),
