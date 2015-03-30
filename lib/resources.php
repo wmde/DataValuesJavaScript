@@ -34,7 +34,6 @@ return call_user_func( function() {
 				'qunit.parameterize/qunit.parameterize.js',
 			),
 			'dependencies' => array(
-				'jquery.qunit',
 			),
 		),
 
