@@ -15,6 +15,11 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.6.2 (2015-03-31)
+
+#### Bugfixes
+* Remove qunit dependency to make QUnit tests work in Karma
+
 ### 0.6.1 (2014-11-07)
 
 #### Enhancements
