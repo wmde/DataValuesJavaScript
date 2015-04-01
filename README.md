@@ -1,4 +1,4 @@
-# DataValues Javascript
+# DataValues JavaScript
 
 This component is in alpha state and not suitable for reuse yet.
 It contains various JavaScript related to the DataValues library.
@@ -14,6 +14,21 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 * Write high level description and documentation in this README file.
 
 ## Release notes
+
+### 0.7.0 (dev)
+
+#### Breaking changes
+* Renamed `dataValues.UnUnserializableValue` to `dataValues.UnDeserializableValue`.
+* Changed constructor parameter order of `dataValues.UnDeserializableValue` (formerly `dataValues.UnUnserializableValue`).
+* Removed `time.js` legacy code, including `time.Time` and `time.Parser`. Every "vital" functionality has been ported to `dataValues.TimeValue` which now may be interacted with directly instead of having to retrieve the encapsulated `time.Time` object first.
+* Removed obsolete `valueParsers.TimeParser`. Back-end parser is to be used via API.
+* Removed obsolete `mw.ext.dataValues` module as it was just overwriting the obsolete `time.js` settings. Dependencies should be updated to point directly to the `dataValues.values` module.
+
+#### Enhancements
+* Consolidated code structure, updated and added code documentation to allow generating a proper documentation using JSDuck.
+
+### 0.6.3 (2015-04-01)
+* Remove explicit resource loader dependency on jquery.qunit.
 
 ### 0.6.1 (2014-11-07)
 
@@ -69,7 +84,7 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 #### Bugfixes
 
 * Fixed definitions of ResourceLoader test modules.
-* Accept ISO8601-formatted timestamps with zeroes as months and days
+* Accept timestamp strings with zeroes as months and days
 * Always return a string in time.writeYear and time.writeDay
 
 ### 0.3.1 (2014-02-03)
