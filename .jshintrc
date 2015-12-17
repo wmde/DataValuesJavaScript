@@ -27,20 +27,19 @@
 	// Environment
 	"browser": true,
 
-	// Globals
-	"predef": [
-		"dataValues",
-		"globeCoordinate",
-		"jQuery",
-		"mediaWiki",
-		"QUnit",
-		"valueFormatters",
-		"valueParsers",
-		"time",
-		"util",
-		// require.js globals:
-		"require",
-		"requirejs",
-		"define"
-	]
+	"globals": {
+		"define": false,
+		"jQuery": false,
+		"mediaWiki": false,
+		"QUnit": false,
+		"require": false,
+		"requirejs": false,
+		"time": false,
+
+		"dataValues": true,
+		"globeCoordinate": true,
+		"util": true,
+		"valueFormatters": true,
+		"valueParsers": true
+	}
 }

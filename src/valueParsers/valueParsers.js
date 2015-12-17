@@ -1,4 +1,4 @@
 /**
  * @ignore
  */
-this.valueParsers = this.valueParsers || {};
+valueParsers = valueParsers || {};
