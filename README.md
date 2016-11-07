@@ -11,6 +11,9 @@ On [Packagist](https://packagist.org/packages/data-values/javascript):
 
 ## Release notes
 
+### 0.8.3 (2016-11-07)
+ * Added support for QuantityValue without bounds
+ 
 ### 0.8.2 (2016-04-12)
 * Added 1/10000 of an arcsecond as a known precision to `globeCoordinate.Formatter`.
 * Fixed `globeCoordinate.Formatter.PRECISIONTEXT` not properly supporting precisions lower than
