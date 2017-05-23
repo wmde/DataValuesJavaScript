@@ -1,4 +1,4 @@
 /**
  * @ignore
  */
-this.valueFormatters = this.valueFormatters || {};
+valueFormatters = valueFormatters || {};

@@ -6,7 +6,7 @@
  * @license GPL-2.0+
  * @author Jeroen De Dauw < jeroendedauw@gmail.com >
  */
-this.dataValues = new ( function Dv() {
+dataValues = new ( function Dv() {
 	'use strict';
 
 	var dvs = [];

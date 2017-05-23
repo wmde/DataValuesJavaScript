@@ -5,7 +5,7 @@
  * @license GPL-2.0+
  * @author H. Snater < mediawiki@snater.com >
  */
-this.config = ( function() {
+config = ( function() {
 	'use strict';
 
 	return {
