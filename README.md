@@ -7,7 +7,7 @@ It contains various JavaScript related to the DataValues library.
 
 ## Release notes
 
-### 1.0.0 (dev)
+### 1.0.0 (2017-10-04)
 * The library is now a pure JavaScript library.
 * Removed MediaWiki ResourceLoader module definitions.
 
