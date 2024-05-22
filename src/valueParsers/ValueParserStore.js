@@ -51,12 +51,6 @@ $.extend( SELF.prototype, {
 	_parsersForDataTypes: null,
 
 	/**
-	 * @property {Object}
-	 * @private
-	 */
-	_parsersForDataValueTypes: null,
-
-	/**
 	 * Registers a parser for a certain data type.
 	 *
 	 * @param {Function} Parser
@@ -81,50 +75,24 @@ $.extend( SELF.prototype, {
 	},
 
 	/**
-	 * Registers a parser for a certain data value type.
-	 *
-	 * @param {Function} Parser
-	 * @param {string} dataValueType
-	 *
-	 * @throws {Error} if no data value type is specified.
-	 * @throws {Error} if a parser for the specified data value type is registered already.
-	 */
-	registerDataValueParser: function( Parser, dataValueType ) {
-		assertIsValueParserConstructor( Parser );
-
-		if( dataValueType === undefined ) {
-			throw new Error( 'No proper data value type provided to register the parser for' );
-		}
-
-		if( this._parsersForDataValueTypes[dataValueType] ) {
-			throw new Error( 'Parser for DataValue type "' + dataValueType + '" is registered '
-				+ 'already' );
-		}
-
-		this._parsersForDataValueTypes[dataValueType] = Parser;
-	},
-
-	/**
 	 * Returns the ValueParser constructor registered for the specified purpose or the default
 	 * parser if no ValueParser is registered for that purpose.
 	 *
-	 * @param {string} dataValueType
+	 * @param {string} _dataValueType unused
 	 * @param {string} [dataTypeId]
 	 * @return {Function|null}
 	 *
 	 * @throws {Error} if no proper purpose is provided to retrieve a parser.
 	 */
-	getParser: function( dataValueType, dataTypeId ) {
+	getParser: function( _dataValueType, dataTypeId ) {
 		var parser;
 
 		if( typeof dataTypeId === 'string' ) {
 			parser = this._parsersForDataTypes[dataTypeId];
 		}
 
-		if( !parser && typeof dataValueType === 'string' ) {
-			parser = this._parsersForDataValueTypes[dataValueType];
-		} else if( !parser ) {
-			throw new Error( 'No sufficient purpose provided for choosing a parser' );
+		if ( !parser && typeof _dataValueType !== 'string' ) {
+			throw new Error( 'Parser must be selected by dataTypeId - dataValueType is deprecated' );
 		}
 
 		return parser || this._DefaultParser;

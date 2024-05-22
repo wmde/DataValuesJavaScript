@@ -36,6 +36,7 @@
 		UnknownValue = dv.UnknownValue,
 		stringType = new DataTypeMock( 'somestringtype', StringValue ),
 		numberType = new DataTypeMock( 'somenumbertype', dv.NumberValue ),
+		unknownType = new DataTypeMock( 'unknowntype', UnknownValue ),
 		StringParser = vp.StringParser,
 		NullParser = vp.NullParser;
 
@@ -70,26 +71,6 @@
 		);
 	} );
 
-	QUnit.test( 'registerDataValueParser(): Error handling', function( assert ) {
-		var parserStore = new vp.ValueParserStore();
-
-		assert.throws(
-			function() {
-				parserStore.registerDataValueParser( 'invalid', StringValue.TYPE );
-			},
-			'Failed trying to register an invalid parser constructor.'
-		);
-
-		parserStore.registerDataValueParser( StringParser, StringValue.TYPE );
-
-		assert.throws(
-			function() {
-				parserStore.getParser( StringValue );
-			},
-			'Failed trying to get a parser with an invalid purpose.'
-		);
-	} );
-
 	QUnit.test( 'Return default parser on getParser()', function( assert ) {
 		var parserStore = new vp.ValueParserStore( NullParser );
 
@@ -105,10 +86,10 @@
 			'Returning default parser if no parser is registered for a specific data type.'
 		);
 
-		parserStore.registerDataValueParser( StringParser, StringValue.TYPE );
+		parserStore.registerDataTypeParser( StringParser, StringValue.TYPE );
 
 		assert.equal(
-			parserStore.getParser( StringValue.TYPE ),
+			parserStore.getParser( 'ignored', StringValue.TYPE ),
 			StringParser,
 			'Returning specific parser if a parser is registered for a specific data value.'
 		);
@@ -137,18 +118,16 @@
 			title: 'Empty ValueParserStore',
 			register: [],
 			expect: [
-				[ StringValue, null ],
 				[ stringType, null ]
 			]
 		},
 		{
-			title: 'Store with parser for string DataValue which is also suitable for string '
-				+ 'DataType',
+			title: 'Store with parser for string DataType - no fallback support for DataValue',
 			register: [
-				[ StringValue, StringParser ]
+				[ stringType, StringParser ]
 			],
 			expect: [
-				[ StringValue, StringParser ],
+				[ StringValue, null ],
 				[ stringType, StringParser ], // data type uses value type
 				[ UnknownValue, null ],
 				[ numberType, null ]
@@ -166,27 +145,14 @@
 			]
 		},
 		{
-			title: 'Store with two parsers: For DataValue and for DataType using that DataValue '
-				+ 'type',
-			register: [
-				[ StringValue, StringParser ],
-				[ stringType, StringParser ]
-			],
-			expect: [
-				[ StringValue, StringParser ],
-				[ stringType, StringParser ],
-				[ UnknownValue, null ]
-			]
-		},
-		{
 			title: 'Store with two parsers for two different DataValue types',
 			register: [
-				[ StringValue, StringParser ],
-				[ UnknownValue, NullParser ]
+				[ stringType, StringParser ],
+				[ unknownType, NullParser ]
 			],
 			expect: [
-				[ StringValue, StringParser ],
-				[ UnknownValue, NullParser ],
+				[ stringType, StringParser ],
+				[ unknownType, NullParser ],
 				[ numberType, null ]
 			]
 		}
@@ -205,7 +171,7 @@
 	 *        parameter. Each inner array should contain a data type, data value or data value
 	 *        constructor and a ValueParser which is expected to be registered for it.
 	 */
-	function valueParserStoreRegistrationTest( assert, toRegister, toExpect ) {
+	function valueParserStoreRegistrationTest( assert, toRegister, toExpect, title ) {
 		var parserStore = new vp.ValueParserStore();
 
 		// Register ValueParsers as per definition:
@@ -216,12 +182,12 @@
 			if( purpose instanceof DataTypeMock ) {
 				parserStore.registerDataTypeParser( Parser, purpose.getId() );
 			} else {
-				parserStore.registerDataValueParser( Parser, purpose.TYPE );
+				parserStore.registerDataTypeParser( Parser, purpose.TYPE );
 			}
 
 			assert.ok(
 				true,
-				'Registered parser for ' + getTypeInfo( purpose )
+				title + ': Registered parser for ' + getTypeInfo( purpose )
 			);
 		} );
 
@@ -242,7 +208,7 @@
 			assert.strictEqual(
 				RetrievedParser,
 				Parser,
-				'Requesting parser for ' + getTypeInfo( purpose ) +
+				title + ': Requesting parser for ' + getTypeInfo( purpose ) +
 					( Parser !== null ? ' returns expected parser' : ' returns null' )
 			);
 		} );
@@ -253,7 +219,7 @@
 		function( assert ) {
 			for ( var i = 0; i < valueParserStoreRegistrationTestCases.length; i++ ) {
 				var params = valueParserStoreRegistrationTestCases[ i ];
-				valueParserStoreRegistrationTest( assert, params.register, params.expect );
+				valueParserStoreRegistrationTest( assert, params.register, params.expect, params.title );
 			}
 		}
 	);
