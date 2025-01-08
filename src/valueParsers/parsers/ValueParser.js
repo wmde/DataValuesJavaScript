@@ -11,10 +11,12 @@
  *
  * @constructor
  *
- * @param {Object} options
+ * @param {Object} options Options related to the value characteristics
+ * @param {Object} apiOptions Options related to how the expert interacts with the API
  */
-var SELF = vp.ValueParser = function VpValueParser( options ) {
+var SELF = vp.ValueParser = function VpValueParser( options, apiOptions ) {
 	this._options = $.extend( {}, options || {} );
+	this._apiOptions = $.extend( {}, apiOptions || {} );
 };
 
 /**
@@ -35,6 +37,15 @@ $.extend( SELF.prototype, {
 	 */
 	getOptions: function() {
 		return $.extend( {}, this._options );
+	},
+
+	/**
+	 * Returns the parser's apiOptions as set in the constructor.
+	 *
+	 * @return {Object}
+	 */
+	getApiOptions: function() {
+		return $.extend( {}, this._apiOptions );
 	},
 
 	/**
